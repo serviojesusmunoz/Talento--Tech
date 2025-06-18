@@ -1,0 +1,58 @@
+import pandas as pd
+import string
+import matplotlib.pyplot as plt
+
+alfabeto = "abcdefghijklmnopqrstuvwxyz"
+
+#Cifrado César (para cifrar y descifra con desplazamiento)
+def cifrado_cesar_es(texto, desplazamiento):
+    resultado = ""
+    for caracter in texto:
+        if caracter.lower() in alfabeto:
+            es_mayus = caracter.isupper()
+            indice = alfabeto.index(caracter.lower())
+            nuevo_indice = (indice + desplazamiento) % len(alfabeto)
+            nuevo_caracter = alfabeto[nuevo_indice]
+            resultado += nuevo_caracter.upper() if es_mayus else nuevo_caracter
+        else:
+            resultado += caracter
+    return resultado
+
+#Descifrar llamando cifrado con desplazamiento
+def descifrado_cesar_es(texto_cifrado, desplazamiento):
+    return cifrado_cesar_es(texto_cifrado, -desplazamiento)
+
+# DataFrame inicial
+datos = {
+    'msj_original': [
+        "Hola mundo",
+        "Estoy en clase",
+        "Mañana es primero de mayo",
+        "¿cómo estás?",
+        "Este es un mensaje de prueba",
+        "Colombia",
+        "Ciberseguridad",
+        "¡Hola!",
+        "Conociendo el cifrado cesar .23$5&",
+        "Realizar actididades"
+    ],
+    'clave': [29, 31, 1, 3, 5, 7, 10, 15, 24, 11]
+}
+
+# DataFrame
+df = pd.DataFrame(datos)
+
+
+def aplicar_cifrado_cesar_es(row):
+    return cifrado_cesar_es(row['msj_original'], row['clave'])
+
+df['msj_cifrado'] = df.apply(aplicar_cifrado_cesar_es, axis=1)
+
+
+def aplicar_descifrado_cesar_es(row):
+    return descifrado_cesar_es(row['msj_cifrado'], row['clave'])
+
+df['msj_descifrado'] = df.apply(aplicar_descifrado_cesar_es, axis=1)
+
+# DataFrame
+df
