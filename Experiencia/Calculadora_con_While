@@ -1,0 +1,141 @@
+import math
+
+def mostrar_menu():
+    print("Calculadora")
+    print("Operaciones disponibles:")
+    print("1. Suma (+)")
+    print("2. Resta (-)")
+    print("3. Multiplicación (x)")
+    print("4. División (/)")
+    print("5. Potencia (^)")
+    print("6. Raíz cuadrada (sqrt)")
+    print("7. Logaritmo base 10 (log10)")
+    print("8. Seno (sen)")
+    print("9. Coseno (cos)")
+    print("10. Tangente (tan)")
+    print("0. Salir")
+
+
+def obtener_numeros(opcion):
+    operaciones = {
+        "1": "+",
+        "2": "-",
+        "3": "x",
+        "4": "/",
+        "5": "^",
+        "6": "sqrt",
+        "7": "log10",
+        "8": "sen",
+        "9": "cos",
+        "10": "tan"
+    }
+
+    operacion = operaciones[opcion]
+
+    if operacion in ['+', '-', 'x', '/', '^']:
+        num1 = float(input("Ingrese el primer número: "))
+        num2 = float(input("Ingrese el segundo número: "))
+    else:
+        num1 = float(input("Ingrese el número: "))
+        num2 = 0
+
+    return num1, num2, operacion
+
+def suma(a, b):
+    return a + b
+
+def resta(a, b):
+    return a - b
+
+def multiplicacion(a, b):
+    return a * b
+
+def division(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "No se puede dividir por cero"
+
+def potencia(a, b):
+    return a ** b
+
+def raiz_cuadrada(a):
+    if a >= 0:
+        return math.sqrt(a)
+    else:
+        return "No se puede calcular la raíz cuadrada de un número negativo"
+
+def logaritmo_base10(a):
+    if a > 0:
+        return math.log10(a)
+    else:
+        return "No se puede calcular el logaritmo de un número negativo o cero"
+
+def seno(a):
+    return math.sin(a)
+
+def coseno(a):
+    return math.cos(a)
+
+def tangente(a):
+    try:
+        return math.tan(a)
+    except ValueError:
+        return "Error al calcular la tangente para este valor"
+
+def calcular(num1, num2, operacion):
+    if operacion == '+':
+        resultado = suma(num1, num2)
+        mensaje = f"{num1} + {num2} = {resultado}"
+    elif operacion == '-':
+        resultado = resta(num1, num2)
+        mensaje = f"{num1} - {num2} = {resultado}"
+    elif operacion == 'x':
+        resultado = multiplicacion(num1, num2)
+        mensaje = f"{num1} x {num2} = {resultado}"
+    elif operacion == '/':
+        resultado = division(num1, num2)
+        mensaje = f"{num1} / {num2} = {resultado}"
+    elif operacion == '^':
+        resultado = potencia(num1, num2)
+        mensaje = f"{num1} ^ {num2} = {resultado}"
+    elif operacion == 'sqrt':
+        resultado = raiz_cuadrada(num1)
+        mensaje = f"La raíz cuadrada de {num1} es {resultado}"
+    elif operacion == 'log10':
+        resultado = logaritmo_base10(num1)
+        mensaje = f"log10({num1}) = {resultado}"
+    elif operacion == 'sen':
+        resultado = seno(num1)
+        mensaje = f"sen({num1}) = {resultado}"
+    elif operacion == 'cos':
+        resultado = coseno(num1)
+        mensaje = f"cos({num1}) = {resultado}"
+    elif operacion == 'tan':
+        resultado = tangente(num1)
+        mensaje = f"tan({num1}) = {resultado}"
+    else:
+        mensaje = "Operación no válida"
+
+    return mensaje
+
+def calculadora_cientifica():
+    while True:
+        mostrar_menu()
+        opcion = input("Seleccione una operación (0-10): ")
+
+        if opcion == "0":
+            print("Sesión terminada")
+            break
+
+        try:
+            if opcion in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+                num1, num2, operacion = obtener_numeros(opcion)
+                resultado = calcular(num1, num2, operacion)
+                print(resultado)
+            else:
+                print("Opción no válida. Por favor seleccione una opción del menú (0-10).")
+        except ValueError:
+            print("Error: Entrada inválida. Por favor ingrese números válidos.")
+
+        input("Presione Enter para continuar...")
