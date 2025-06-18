@@ -1,1 +1,37 @@
+import random
 
+def mostrar_palabra(palabra_secreta, letras_adivinadas):
+    return ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra_secreta])
+
+def ahorcado():
+    palabras = ['python', 'computadora', 'programacion', 'juego', 'ahorcado', 'hola', 'juan', 'dia']
+    palabra_secreta = random.choice(palabras)
+    letras_adivinadas = []
+    intentos = 6
+
+    print("¡Bienvenido al juego del Ahorcado!")
+
+    while intentos > 0:
+        print("\nPalabra: ", mostrar_palabra(palabra_secreta, letras_adivinadas))
+        print(f"Intentos restantes: {intentos}")
+        letra = input("Digita otra letra : ").lower()
+
+        if letra in letras_adivinadas:
+            print("Ya digitaste esta letra.")
+        elif letra in palabra_secreta:
+            print(" La letra digitada está en la palabra.")
+            letras_adivinadas.append(letra)
+        else:
+            print("Letra incorrecta.")
+            letras_adivinadas.append(letra)
+            intentos -= 1
+
+        if all(letra in letras_adivinadas for letra in palabra_secreta):
+            print("\n¡Felicidades! Adivinaste la palabra:", palabra_secreta)
+            break
+    else:
+        print("\n¡Te quedaste sin intentos! La palabra era:", palabra_secreta)
+
+# Ejecutar el juego
+ahorcado()
+     
