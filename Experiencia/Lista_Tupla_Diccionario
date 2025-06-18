@@ -1,0 +1,25 @@
+mascotas = ["Laika", "Boster", "Rocky", "Max"]
+print("Lista de mascotas:")
+for nombre in mascotas:
+    print(f"->{nombre}")
+
+print("\n\n")
+
+razas = ("Labrador", "Pitbull", "Bulldog", "Golden")
+print("Razas de perros:")
+for raza in razas:
+    print(f"-> {raza}")
+
+print("\n\n")
+
+tipos = {"perro", "gato", "loro", "hámster"}
+print("Tipos de mascotas:")
+for tipo in tipos:
+    print(f"-> {tipo}")
+
+print("\n\n")
+
+edades = {"Laika": 3, "Boster": 5, "Rocky": 2, "Max": 4}
+print("Edades de las mascotas:")
+for nombre, edad in edades.items():
+    print(f"-> {nombre} tiene {edad} años")
